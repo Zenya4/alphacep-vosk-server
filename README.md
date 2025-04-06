@@ -15,7 +15,15 @@ For documentation and instructions see [Vosk Website](https://alphacephei.com/vo
 
 ## Usage
 ### Building
-Build an image using the Dockerfile provided in the repository root
+Build a vosk server docker image with phoneme support, using the Dockerfile provided in the repository root. `Dockerfile` compiles the base dependencies required, and `Dockerfile.en` provides a working model.
+```
+docker build --tag "zenyawastaken/vosk-server-phoneme" . # Dockerfile
+mv Dockerfile.en Dockerfile
+docker build --tag "zenyawastaken/vosk-server-phoneme-en" . # Dockerfile.en
+docker run -d -p 2700:2700 zenyawastaken/vosk-server-phoneme-en:latest
+```
+Custom models can be mounted to `/opt/vosk-model/model-en` to override the [default model used](https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip).
+
 ### Models
 The Vosk webserver accepts any model found [here](https://alphacephei.com/vosk/models)
 
