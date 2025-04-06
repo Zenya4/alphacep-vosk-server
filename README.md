@@ -32,13 +32,13 @@ python3 webserver/asr_server.py <path to model folder>
 [Phoneme label & timestamp support](https://github.com/alphacep/vosk-api/pull/1377) is enabled by default. This can be toggled, along with other options, by sending a stringlified 'config' JSON object to the webserver.
 ```json
 {
-  config: {
-    phrase_list: object,
-    sample_rate: int,
-    model: Model,
-    show_words: bool,
-    max_alternatives: int,
-    result_options: string
+  "config": {
+    "phrase_list": "object",
+    "sample_rate": "int",
+    "model": "Model",
+    "show_words": "bool",
+    "max_alternatives": "int",
+    "result_options": "string"
   }
 }
 ```
