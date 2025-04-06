@@ -32,6 +32,7 @@ async def recognize(websocket):
     sample_rate = args.sample_rate
     show_words = args.show_words
     max_alternatives = args.max_alternatives
+    result_options = args.result_options
 
     logging.info('Connection from %s', websocket.remote_address);
 
@@ -54,6 +55,8 @@ async def recognize(websocket):
                 show_words = bool(jobj['words'])
             if 'max_alternatives' in jobj:
                 max_alternatives = int(jobj['max_alternatives'])
+            if 'result_options' in jobj:
+                result_options = jobj['result_options']
             continue
 
         # Create the recognizer, word list is temporary disabled since not every model supports it
@@ -65,6 +68,7 @@ async def recognize(websocket):
                 rec = KaldiRecognizer(model, sample_rate)
             rec.SetWords(show_words)
             rec.SetMaxAlternatives(max_alternatives)
+            rec.SetResultOptions(result_options)
             if spk_model:
                 rec.SetSpkModel(spk_model)
 
@@ -97,6 +101,8 @@ async def start():
     args.sample_rate = float(os.environ.get('VOSK_SAMPLE_RATE', 8000))
     args.max_alternatives = int(os.environ.get('VOSK_ALTERNATIVES', 0))
     args.show_words = bool(os.environ.get('VOSK_SHOW_WORDS', True))
+    # 'phones' or 'words', see https://github.com/alphacep/vosk-api/pull/1377
+    args.result_options = os.environ.get('VOSK_RESULT_OPTIONS', 'phones')
 
     if len(sys.argv) > 1:
        args.model_path = sys.argv[1]
