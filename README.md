@@ -22,10 +22,10 @@ mv Dockerfile.en Dockerfile
 docker build --tag "zenyawastaken/vosk-server-phoneme-en" . # Dockerfile.en
 docker run -d -p 2700:2700 zenyawastaken/vosk-server-phoneme-en:latest
 ```
-Custom models can be mounted to `/opt/vosk-model/model-en` to override the [default model used](https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip).
+While the above commands will build a fully functional vosk server, we can minimise it further by removing unnecessary install layers. Copy out `zenyawastaken/vosk-server-phoneme-en:/opt` locally, before rebuilding the container as seen in [Dockerfile.min](Dockerfile.min).
 
 ### Models
-The Vosk webserver accepts any model found [here](https://alphacephei.com/vosk/models)
+The Vosk webserver accepts any model found [here](https://alphacephei.com/vosk/models). Custom models can be mounted to `/opt/vosk-model/model-en` to override the [default model used](https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip).
 
 ### Audio Conversion
 Make sure the supplied audio is the same bitrate as the training data (usually 16kHz). Include the `-f` flag to output a raw PCM file (no headers, suitable for streaming) 
