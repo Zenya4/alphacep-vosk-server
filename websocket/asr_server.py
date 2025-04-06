@@ -20,7 +20,7 @@ def process_chunk(rec, message):
     else:
         return rec.PartialResult(), False
 
-async def recognize(websocket, path):
+async def recognize(websocket):
     global model
     global spk_model
     global args
