@@ -42,6 +42,7 @@ python3 webserver/asr_server.py <path to model folder>
   }
 }
 ```
+Ensure that a valid kaldi phone mapping is present under `/<model>/graph/phones.txt`.
 
 ### Testing the Webserver
 Test the webserver using
