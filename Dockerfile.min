@@ -1,0 +1,12 @@
+FROM debian:11-slim
+
+COPY ./opt/ /opt/
+
+RUN apt update
+RUN apt install -y python3 python3-dev python3-websockets python3-setuptools python3-pip python3-wheel python3-cffi
+
+RUN cd /opt/vosk-api/python && python3 ./setup.py install
+
+EXPOSE 2700
+WORKDIR /opt/vosk-server/websocket
+CMD [ "python3", "./asr_server.py", "/opt/vosk-model/model-en" ]
