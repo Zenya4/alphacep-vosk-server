@@ -44,7 +44,7 @@ python3 webserver/asr_server.py <path to model folder>
     "phrase_list": "object",
     "sample_rate": "int",
     "model": "Model",
-    "show_words": "bool",
+    "words": "bool",
     "max_alternatives": "int",
     "result_options": "string"
   }
